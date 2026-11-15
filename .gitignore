@@ -1,0 +1,28 @@
+
+# --- spolecne pro vsechny repa (15.11.2026) ---
+# podpisove klice a hesla nikdy do gitu
+*.jks
+*.keystore
+*.p12
+*.pem
+key.properties
+.env*
+!.env.example
+*.local
+*.local.json
+# sestavene vystupy (APK se nasazuji zvlast)
+*.apk
+*.aab
+node_modules/
+.gradle/
+build/
+local.properties
+android/dist/
+__pycache__/
+.vercel/
+graphify-out/
+# soukroma data, zalohy a logy
+soukrome/
+_zalohy/
+zaznamy/
+logy/

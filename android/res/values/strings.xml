@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nazev">Svátky</string>
+    <string name="widget_nazev">Kdo má dnes svátek</string>
+    <string name="widget_popis">Dnes má svátek a velké jméno. Ve svátek místo jména název dne.</string>
+</resources>

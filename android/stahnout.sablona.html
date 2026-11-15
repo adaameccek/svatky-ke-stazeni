@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Svátky pro Android a iPhone</title>
+<meta name="description" content="Svátky: kdo má dnes svátek, kdo z tvých lidí slaví, horoskop a čínský kalendář. Appka pro Android ke stažení, na iPhonu webová verze na ploše.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Svátky">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Svátky - appka pro Android a iPhone">
+<meta property="og:description" content="Kdo má dnes svátek a kdo z tvých lidí slaví. Na Androidu ke stažení, na iPhonu si ji uložíš na plochu.">
+<meta property="og:image" content="https://svatky.adamhorak.cz/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Svátky - aplikace pro Android a iPhone">
+<meta property="og:url" content="https://svatky.adamhorak.cz/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F4EEE3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/app/ikona-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;700&display=swap">
+<!-- Vygenerováno z android/stahnout.sablona.html přes py android/stranka.py (verze, velikost, QR).
+     Tenhle soubor needitovat ručně, změny patří do šablony.
+     Vzhled jako appka (krémový papír, kalendářová červená, patkové písmo). Vpravo živá webová
+     verze appky v rámečku telefonu (/app/). Android: APK ke stažení. iPhone: webová verze uložená
+     na plochu (žádná zvláštní appka pro iOS, ať se každá změna nedělá dvakrát). -->
+<style>
+  :root {
+    --papir: #F4EEE3; --karta: #FFFCF6; --ink: #1F1A15; --text: #4A4239; --tlum: #766C60; --linka: #E3D9C8;
+    --cervena: #C2362B; --na-cervene: #FFF8F0; --zlata: #B5852A;
+    --zare1: rgba(194, 54, 43, .20); --zare2: rgba(181, 133, 42, .18); --stin: rgba(60, 35, 20, .38);
+    --patka: "Noto Serif", Georgia, serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --papir: #141210; --karta: #1F1C18; --ink: #F2ECE1; --text: #CFC6B8; --tlum: #A2988A; --linka: #322D27;
+      --cervena: #E05A4E; --na-cervene: #FFF8F0; --zlata: #D9A94A;
+      --zare1: rgba(224, 90, 78, .26); --zare2: rgba(217, 169, 74, .16); --stin: rgba(0, 0, 0, .7);
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; color: var(--text);
+    font: 400 17px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--papir); overflow-x: hidden;
+  }
+  main { width: 100%; max-width: 980px; padding: max(28px, env(safe-area-inset-top)) 16px max(32px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: center; }
+  .text { max-width: 430px; width: 100%; margin: 0 auto; }
+  b { font-weight: 600; color: var(--ink); }
+  a { color: var(--cervena); }
+  :focus-visible { outline: 2px solid var(--cervena); outline-offset: 3px; }
+
+  .hlava { display: flex; align-items: center; gap: 14px; }
+  .logo { display: block; flex: none; width: 58px; height: 58px; border-radius: 15px; box-shadow: 0 8px 20px -8px var(--stin); }
+  h1 { margin: 0; font: 700 clamp(44px, 13vw, 60px)/1 var(--patka); color: var(--ink); letter-spacing: -.01em; }
+  .pod { margin: 4px 0 0; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--tlum); }
+  .perex { margin: 22px 0 0; font: 600 21px/1.35 var(--patka); color: var(--ink); }
+
+  .tlacitka { display: grid; gap: 10px; margin-top: 26px; }
+  .hlavni, .vedlejsi {
+    display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 14px 22px;
+    border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 17px; transition: transform .15s, box-shadow .15s;
+  }
+  .hlavni { background: linear-gradient(180deg, color-mix(in srgb, var(--cervena) 88%, #fff), var(--cervena)); color: var(--na-cervene); box-shadow: 0 10px 24px -12px var(--cervena); }
+  .vedlejsi { color: var(--ink); background: var(--karta); box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 6px 18px -12px var(--stin); }
+  .hlavni svg, .vedlejsi svg { flex: none; width: 20px; height: 20px; }
+  .hlavni:active, .vedlejsi:active { transform: scale(.985); }
+  @media (hover: hover) { .hlavni:hover, .vedlejsi:hover { transform: translateY(-1px); } }
+  .meta { margin: 12px 0 0; font-size: 14px; color: var(--tlum); font-variant-numeric: tabular-nums; }
+  .po { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: color-mix(in srgb, var(--cervena) 10%, var(--karta)); color: var(--ink); font-size: 15.5px; }
+  .po[hidden] { display: none; }
+
+  /* instalace: Android a iPhone na přepnutí */
+  .instalace { margin-top: 26px; background: var(--karta); border-radius: 16px; padding: 6px 6px 16px; box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 14px 30px -20px var(--stin); }
+  .prepinac { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 11px; background: color-mix(in srgb, var(--linka) 60%, transparent); }
+  .prepinac button { appearance: none; border: 0; background: none; color: var(--tlum); font: 600 14.5px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 11px 8px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; }
+  .prepinac button svg { width: 17px; height: 17px; }
+  .prepinac button[aria-selected="true"] { background: var(--karta); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .14); }
+  .panel { padding: 16px 12px 0; }
+  .panel[hidden] { display: none; }
+  .panel h2 { margin: 0 0 12px; font: 700 18px/1.25 var(--patka); color: var(--ink); }
+  ol { margin: 0; padding: 0; list-style: none; counter-reset: krok; display: grid; gap: 12px; }
+  li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; counter-increment: krok; font-size: 15.5px; line-height: 1.4; }
+  li::before { content: counter(krok); width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--cervena) 13%, var(--karta)); color: var(--cervena); font: 700 15px/1 var(--patka); }
+  li span { padding-top: 4px; }
+  .ik { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.18em; color: var(--ink); }
+  .pozn { margin: 14px 0 0; font-size: 14px; color: var(--tlum); }
+
+  .qr { display: none; align-items: center; gap: 16px; margin-top: 22px; font-size: 15px; }
+  .qr .kod { flex: none; background: #fff; padding: 8px; line-height: 0; border-radius: 8px; box-shadow: 0 8px 20px -14px var(--stin); }
+  .qr .kod svg { display: block; width: auto; height: auto; shape-rendering: crispEdges; }
+  @media (hover: hover) and (pointer: fine) { .qr { display: flex; } }
+
+  /* živá appka v rámečku telefonu: iframe má velikost telefonu (390 x 800) a zmenší se, aby se vešel */
+  .nahled { position: relative; display: grid; justify-items: center; gap: 16px; isolation: isolate; }
+  .nahled::before {
+    content: ""; position: absolute; z-index: -1; left: 50%; top: 46%; width: min(150%, 720px); aspect-ratio: 1; transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, var(--zare1), transparent 70%), radial-gradient(closest-side at 70% 30%, var(--zare2), transparent 70%);
+    filter: blur(10px); pointer-events: none;
+  }
+  .telefon {
+    --s: .8; position: relative; width: calc(390px * var(--s) + 22px); padding: 11px; border-radius: calc(46px * var(--s) + 11px);
+    background: linear-gradient(150deg, #4A433D 0%, #1C1815 38%, #0E0C0B 70%, #2A2521 100%);
+    box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .14), inset 0 0 0 4px #0B0A09, 0 2px 4px rgba(0, 0, 0, .25), 0 50px 90px -40px var(--stin), 0 24px 40px -28px var(--stin);
+  }
+  .telefon::before, .telefon::after { content: ""; position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(90deg, #2A2521, #4A433D); }
+  .telefon::before { right: -3px; top: 22%; height: 9%; }
+  .telefon::after { right: -3px; top: 34%; height: 14%; }
+  .displej { width: calc(390px * var(--s)); height: calc(800px * var(--s)); border-radius: calc(46px * var(--s)); overflow: hidden; position: relative; background: var(--papir); }
+  .displej iframe { position: absolute; left: 0; top: 0; width: 390px; height: 800px; border: 0; transform: scale(var(--s)); transform-origin: 0 0; }
+  .naCelou { display: inline-flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 600; text-decoration: none; }
+  .naCelou svg { width: 16px; height: 16px; }
+
+  @media (min-width: 780px) {
+    main { grid-template-columns: minmax(0, 1fr) auto; gap: 72px; padding-top: 48px; padding-bottom: 48px; }
+    .text { margin: 0; }
+    .telefon { --s: .86; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hlavni, .vedlejsi { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="text">
+    <div class="hlava">
+      {{LOGO}}
+      <div>
+        <h1>Svátky</h1>
+        <p class="pod">Pro Android i iPhone</p>
+      </div>
+    </div>
+    <p class="perex">Kdo má dnes svátek a kdo z tvých lidí slaví. K tomu horoskop a čínský kalendář.</p>
+
+    <div class="tlacitka">
+      <a class="hlavni" id="stahnout" href="/svatky.apk?v={{KOD}}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+        Stáhnout pro Android
+      </a>
+      <a class="vedlejsi" id="web" href="/app/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+        <span id="webText">Otevřít v prohlížeči</span>
+      </a>
+    </div>
+    <p class="meta" id="meta">{{ANDROID}} · {{VELIKOST}} · verze {{VERZE}} · zdarma, bez účtu</p>
+    <p class="po" id="po" role="status" hidden>Soubor je stažený. Otevři v Chromu nabídku <b>⋮</b>, <b>Stažené soubory</b> a klepni na <b>svatky.apk</b>.</p>
+
+    <section class="instalace" aria-label="Jak nainstalovat">
+      <div class="prepinac" role="tablist">
+        <button role="tab" id="tA" aria-selected="true" aria-controls="pA">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22a11.4 11.4 0 0 0-9.84 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>
+          Android</button>
+        <button role="tab" id="tI" aria-selected="false" aria-controls="pI">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.700-2.900-1.900-3.500-1.900-1.500-.2-2.900.9-3.700.9-.8 0-1.900-.9-3.200-.8-1.600 0-3.100 1-4 2.400-1.700 2.900-.4 7.300 1.200 9.700.8 1.200 1.800 2.500 3 2.400 1.200 0 1.700-.8 3.100-.8 1.500 0 1.900.8 3.200.8 1.300 0 2.100-1.200 2.900-2.400.9-1.300 1.300-2.700 1.300-2.700s-2.400-1-2.400-3.900zM14.100 5.500c.7-.8 1.100-1.900 1-3-1 0-2.100.6-2.800 1.400-.6.700-1.200 1.800-1 2.900 1 .1 2.100-.5 2.800-1.300z"/></svg>
+          iPhone</button>
+      </div>
+      <div class="panel" id="pA" role="tabpanel" aria-labelledby="tA">
+        <h2>Nainstaluj appku</h2>
+        <ol>
+          <li><span><b>Stáhni.</b> Když se Chrome zeptá, potvrď.</span></li>
+          <li><span><b>Otevři soubor.</b> V Chromu nabídka ⋮, Stažené soubory, svatky.apk.</span></li>
+          <li><span><b>Instaluj.</b> Napoprvé povol instalaci z Chromu. Když se ozve Play Protect: Podrobnosti, Přesto nainstalovat.</span></li>
+        </ol>
+        <p class="pozn">Appka umí i kontakty, widget na plochu a ranní oznámení.</p>
+      </div>
+      <div class="panel" id="pI" role="tabpanel" aria-labelledby="tI" hidden>
+        <h2>Ulož si ji na plochu</h2>
+        <ol>
+          <li><span><b>Otevři</b> <a href="/app/">webovou verzi</a> v Safari.</span></li>
+          <li><span><b>Klepni na Sdílet</b> <svg class="ik" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m8 7 4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg> dole uprostřed.</span></li>
+          <li><span><b>Přidat na plochu.</b> Ikona Svátků se objeví vedle ostatních appek a otevře se bez lišty prohlížeče.</span></li>
+        </ol>
+        <p class="pozn">Na iPhonu běží webová verze. Umí všechno kromě kontaktů, widgetu a ranních oznámení.</p>
+      </div>
+    </section>
+
+    <div class="qr">
+      <div class="kod">{{QR}}</div>
+      <div><b>Jsi na počítači?</b><br>Naskenuj kód telefonem.</div>
+    </div>
+  </div>
+
+  <div class="nahled">
+    <div class="telefon"><div class="displej"><iframe src="/app/" title="Svátky, živá ukázka appky" loading="eager"></iframe></div></div>
+    <a class="naCelou" href="/app/">Otevřít na celou obrazovku
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+  </div>
+</main>
+<script>
+  // přepínač Android / iPhone
+  function ukaz(ios) {
+    document.getElementById("tA").setAttribute("aria-selected", String(!ios));
+    document.getElementById("tI").setAttribute("aria-selected", String(ios));
+    document.getElementById("pA").hidden = ios;
+    document.getElementById("pI").hidden = !ios;
+  }
+  document.getElementById("tA").addEventListener("click", function () { ukaz(false); });
+  document.getElementById("tI").addEventListener("click", function () { ukaz(true); });
+  // na iPhonu a iPadu není co stahovat: hlavní tlačítko otevře webovou verzi a rovnou je vidět postup pro iPhone
+  var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (ios) {
+    ukaz(true);
+    document.getElementById("stahnout").hidden = true;
+    document.getElementById("stahnout").style.display = "none";
+    document.getElementById("web").className = "hlavni";
+    document.getElementById("webText").textContent = "Otevřít Svátky";
+    document.getElementById("meta").textContent = "Na iPhonu jako webová appka · zdarma, bez účtu";
+  }
+  // Chrome stáhne malý soubor dřív, než si toho člověk všimne, a druhé klepnutí jen nabídne
+  // "Stáhnout soubor znovu?". Proto po klepnutí stránka sama řekne, kde soubor najít.
+  document.getElementById("stahnout").addEventListener("click", function () {
+    setTimeout(function () {
+      document.getElementById("meta").hidden = true;
+      document.getElementById("po").hidden = false;
+    }, 1200);
+  });
+  // náhled zmenšit tak, aby se telefon vešel na šířku i na výšku okna
+  (function () {
+    var t = document.querySelector(".telefon");
+    function uprav() {
+      var s = Math.min((window.innerWidth - 32 - 22) / 390, (window.innerWidth >= 780 ? window.innerHeight - 120 : 99999) / 800, .9);
+      t.style.setProperty("--s", Math.max(.6, s).toFixed(3));
+    }
+    uprav(); window.addEventListener("resize", uprav);
+  })();
+</script>
+</body>
+</html>

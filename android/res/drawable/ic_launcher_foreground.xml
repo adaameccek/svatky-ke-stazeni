@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- List trhacího kalendáře se srdíčkem. Motiv je schválně menší (asi 0,78 bezpečné zóny), ať na ploše nekřičí. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#FFF8F0" android:pathData="M37,33h34a4,4 0 0 1 4,4v36a4,4 0 0 1 -4,4H37a4,4 0 0 1 -4,-4V37a4,4 0 0 1 4,-4z" />
+    <path android:fillColor="#7E1F18" android:pathData="M37,33h34a4,4 0 0 1 4,4v8H33v-8a4,4 0 0 1 4,-4z" />
+    <path android:fillColor="#FFF8F0" android:pathData="M43,37.500a1.800,1.800 0 1 0 0.010,0zM65,37.500a1.800,1.800 0 1 0 0.010,0z" />
+    <path android:fillColor="#C2362B" android:pathData="M54,71c-11,-7.500 -10.500,-17 -4.800,-17 2.200,0 3.800,1.200 4.800,2.900 1,-1.700 2.600,-2.900 4.800,-2.900 5.700,0 6.200,9.500 -4.800,17z" />
+</vector>

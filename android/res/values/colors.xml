@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pozadi">#F4EEE3</color>
+    <color name="karta">#FFFCF6</color>
+    <color name="ink">#1F1A15</color>
+    <color name="cervena">#C2362B</color>
+    <color name="na_cervene">#FFF8F0</color>
+    <color name="ikona_pozadi">#C2362B</color>
+</resources>

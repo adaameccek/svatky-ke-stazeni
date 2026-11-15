@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Motiv" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/pozadi</item>
+        <item name="android:statusBarColor">@color/pozadi</item>
+        <item name="android:navigationBarColor">@color/pozadi</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:colorAccent">@color/cervena</item>
+    </style>
+</resources>
